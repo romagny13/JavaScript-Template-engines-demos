@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+        <div class="container"></div>
+        <div class="container-2"></div>
+        <div class="container-3"></div>
+
+        <script type="text/x-handlebars-template" id="template">
+            {{#each cards}}
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{img}}" />
+                </div>
+                <div class="card-content">{{content}}</div>
+            </div>
+            {{/each}}
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+        <script>
+
+            $(document).ready(function(){
+
+                function initialize(){
+
+                    var cards = [{
+                        img:'http://pipsum.com/400x250.jpg',
+                        content:'Lorem 1'
+                    }, {
+                        img:'http://pipsum.com/400x250.jpg',
+                        content:'Lorem 2'
+                    },{
+                        img:'http://pipsum.com/400x250.jpg',
+                        content:'Lorem 3'
+                    }];
+
+
+                    // template dans la page
+                    var template = $('#template').html(),
+                        compiled = Handlebars.compile(template),
+                        rendered = compiled({ cards: cards });
+                    $('.container').html(rendered);
+
+
+                    // template dans fichier (requiert d'être lancé depuis un serveur)
+                    //{{#each cards}}
+                    //<div class="card">
+                    //    <div class="card-image">
+                    //        <img src="{{img}}" />
+                    //    </div>
+                    //    <div class="card-content">{{content}}</div>
+                    //</div>
+                    //{{/each}}
+                    $.get("/templates/template-handlebars.html", function (template) {
+                        var compiled = Handlebars.compile(template),
+                            rendered = compiled({ cards: cards });
+                        $('.container-2').html(rendered);
+                    });
+
+
+                    // html
+                    var card ={
+                        content:'Lorem 4'
+                    };
+                    var template = "{{#card}}<div>{{content}}</div>{{/card}}",
+                        compiled = Handlebars.compile(template),
+                        rendered = compiled({ card: card });
+                    $('.container-3').html(rendered);
+                }
+
+                initialize();
+            })
+        </script>
+    </body>
+</html>

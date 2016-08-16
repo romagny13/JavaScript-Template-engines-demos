@@ -1,0 +1,70 @@
+<!--https://github.com/KanbanSolutions/jquery-tmpl-->
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <div class="container"></div>
+        <div class="container-2"></div>
+        <div class="container-3"></div>
+
+        <script id="template" type="text/x-jquery-tmpl">
+            <div class="card">
+               <div class="card-image">
+                   <img src="${img}" />
+            </div>
+                <div class="card-content">${content}</div>
+            </div>
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="js/jquery-tmpl.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                function initialize(){
+
+                    var cards = [{
+                        img:'http://pipsum.com/400x250.jpg',
+                        content:'Lorem 1'
+                    }, {
+                        img:'http://pipsum.com/400x250.jpg',
+                        content:'Lorem 2'
+                    },{
+                        img:'http://pipsum.com/400x250.jpg',
+                        content:'Lorem 3'
+                    }];
+
+                    // template dans la page
+                    $("#template").tmpl(cards).appendTo(".container");
+
+                    // Template dans un fichier
+                    // chargement d'un template 
+                    // <div class="card one-third">
+                    //    <div class="card-image">
+                    //        <img src="${img}" />
+                    //    </div>
+                    //    <div class="card-content">${content}</div>
+                    // </div>
+                    $.get("/templates/template-jquery-tmpl.html", function (template) {
+                        $.tmpl(template, cards).appendTo(".container-2");
+                    });
+
+                    // html
+                    var card ={
+                        content:'Lorem 4'
+                    };
+                    // on peut également charger du html
+                    $.tmpl("<div>${content}</div>", card).appendTo(".container-3"); 
+                }
+
+                initialize();
+            })
+        </script>
+    </body>
+</html>
