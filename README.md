@@ -1,6 +1,6 @@
 # JavaScript Template engines demos
 
-jQuery tmpl [a link](http://plugins.jquery.com/jquery-tmpl/)
-Mustache [a link](https://github.com/janl/mustache.js)
-Handlebars [a link](http://handlebarsjs.com/)
-jQuery Template [a link](https://github.com/codepb/jquery-template)
+[jQuery tmpl](http://plugins.jquery.com/jquery-tmpl/) <br/>
+[Mustache](https://github.com/janl/mustache.js) <br/>
+[Handlebars](http://handlebarsjs.com/) <br/>
+[jQuery Template](https://github.com/codepb/jquery-template) <br/>
